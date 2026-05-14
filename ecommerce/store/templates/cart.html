@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cart</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial;
+        }
+
+        body{
+            background:#f4f6f8;
+        }
+
+        /* NAVBAR */
+        .navbar{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:16px 50px;
+            background:white;
+            box-shadow:0 2px 10px rgba(0,0,0,0.06);
+        }
+
+        .logo{
+            font-size:22px;
+            font-weight:bold;
+            color:#0b5d3b;
+        }
+
+        .nav-links a{
+            margin-left:18px;
+            text-decoration:none;
+            color:#333;
+        }
+
+        /* CART WRAPPER */
+        .container{
+            max-width:900px;
+            margin:40px auto;
+        }
+
+        .title{
+            font-size:28px;
+            margin-bottom:20px;
+        }
+
+        /* ITEM CARD */
+        .item{
+            background:white;
+            padding:20px;
+            margin-bottom:15px;
+            border-radius:12px;
+            box-shadow:0 4px 15px rgba(0,0,0,0.05);
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .item-left h2{
+            font-size:18px;
+            margin-bottom:6px;
+        }
+
+        .item-left p{
+            color:#555;
+            font-size:14px;
+            margin:3px 0;
+        }
+
+        .remove-btn{
+            background:#e74c3c;
+            color:white;
+            border:none;
+            padding:8px 14px;
+            border-radius:8px;
+            cursor:pointer;
+        }
+
+        /* TOTAL BOX */
+        .total-box{
+            background:white;
+            padding:20px;
+            border-radius:12px;
+            margin-top:20px;
+            box-shadow:0 4px 15px rgba(0,0,0,0.05);
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .total{
+            font-size:20px;
+            font-weight:bold;
+        }
+
+        /* BUTTONS */
+        .actions{
+            margin-top:20px;
+            display:flex;
+            justify-content:space-between;
+        }
+
+        .btn{
+            padding:12px 18px;
+            border-radius:10px;
+            text-decoration:none;
+            font-weight:600;
+            display:inline-block;
+        }
+
+        .shop{
+            background:#111;
+            color:white;
+        }
+
+        .checkout{
+            background:#0b5d3b;
+            color:white;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">Elegance</div>
+
+    <div class="nav-links">
+        <a href="/home/">Home</a>
+        <a href="/products/">Products</a>
+        <a href="/cart/">Cart</a>
+        <a href="/logout/">Logout</a>
+    </div>
+</div>
+
+<!-- CART -->
+<div class="container">
+
+    <div class="title">Your Cart</div>
+
+    {% for item in cart_items %}
+
+    <div class="item">
+
+        <div class="item-left">
+            <h2>{{ item.product.name }}</h2>
+            <p>Price: ₹{{ item.product.price }}</p>
+            <p>Quantity: {{ item.quantity }}</p>
+            <p>Subtotal: ₹{{ item.subtotal }}</p>
+        </div>
+
+        <a href="/remove-from-cart/{{ item.product.id }}/">
+            <button class="remove-btn">Remove</button>
+        </a>
+
+    </div>
+
+    {% endfor %}
+
+    <!-- TOTAL -->
+    <div class="total-box">
+        <div>Total</div>
+        <div class="total">₹{{ total }}</div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="actions">
+<a href="/products/" class="btn btn-dark">Continue Shopping</a>
+<a href="/checkout/" class="btn btn-green">Checkout</a>
+      
+    </div>
+
+</div>
+
+</body>
+</html>

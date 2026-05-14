@@ -1,0 +1,208 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ product.name }}</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+   <style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:#f4f6f8;
+    color:#222;
+    padding:0;
+}
+
+/* NAVBAR */
+.navbar{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 60px;
+    background:#fff;
+    box-shadow:0 2px 10px rgba(0,0,0,0.06);
+}
+
+/* WRAPPER (IMPORTANT FIX) */
+.page{
+    width:100%;
+    padding:40px 0;   /* 🔥 equal top/bottom spacing */
+    display:flex;
+    justify-content:center;
+}
+
+/* MAIN CARD */
+.container{
+    width:100%;
+    max-width:1100px;
+    background:#fff;
+    padding:40px;
+    border-radius:16px;
+    display:flex;
+    gap:50px;
+    align-items:center;
+    box-shadow:0 8px 25px rgba(0,0,0,0.08);
+}
+
+/* LEFT */
+.left{
+    flex:1;
+    display:flex;
+    justify-content:center;
+}
+
+.left img{
+    width:100%;
+    max-width:420px;
+    height:420px;
+    object-fit:contain;
+    border-radius:12px;
+}
+
+/* RIGHT */
+.right{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.title{
+    font-size:34px;
+    font-weight:700;
+    color:#0b5d3b;
+}
+
+.price{
+    font-size:28px;
+    font-weight:700;
+}
+
+.desc{
+    color:#555;
+    line-height:1.7;
+}
+
+/* BUTTONS */
+.buttons{
+    display:flex;
+    gap:14px;
+    margin-top:10px;
+}
+
+.btn{
+    padding:12px 22px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:600;
+    display:inline-block;
+}
+
+.buy{
+    background:#111;
+    color:#fff;
+}
+
+.cart{
+    background:#0b5d3b;
+    color:#fff;
+}
+
+/* INFO */
+.info{
+    margin-top:18px;
+    padding:16px;
+    border-radius:12px;
+    border:1px solid #eee;
+    background:#fafafa;
+}
+
+.info p{
+    margin:6px 0;
+    font-size:14px;
+    color:#555;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .container{
+        flex-direction:column;
+        text-align:center;
+        padding:25px;
+    }
+
+    .left img{
+        height:auto;
+    }
+
+    .buttons{
+        justify-content:center;
+    }
+}
+</style>
+
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">Elegance</div>
+
+    <div class="nav-links">
+        <a href="/home/">Home</a>
+        <a href="/products/">Products</a>
+        <a href="/cart/">Cart</a>
+        <a href="/logout/">Logout</a>
+    </div>
+</div>
+
+<!-- PRODUCT -->
+<div class="container">
+
+    <!-- IMAGE -->
+    <div class="left">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% else %}
+            <img src="https://via.placeholder.com/400x400?text=No+Image">
+        {% endif %}
+    </div>
+
+    <!-- DETAILS -->
+    <div class="right">
+
+        <div class="title">{{ product.name }}</div>
+
+        <div class="price">₹ {{ product.price }}</div>
+
+        <div class="desc">
+            {{ product.description }}
+        </div>
+
+        <div class="buttons">
+           <a href="/add-to-cart/{{ product.id }}/" class="btn btn-dark">Buy Now</a>
+<a href="/add-to-cart/{{ product.id }}/" class="btn btn-green">Add To Cart</a>
+        </div>
+
+        <div class="info">
+            <p>🚚 Free Delivery across India</p>
+            <p>🔁 7 Days Return Policy</p>
+            <p>🔒 Secure Payment</p>
+        </div>
+
+    </div>
+
+</div>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</body>
+</html>

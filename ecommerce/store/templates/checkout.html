@@ -1,0 +1,177 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#f6f7fb;
+            color:#222;
+        }
+
+        /* NAVBAR */
+        .navbar{
+            background:white;
+            padding:18px 50px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            box-shadow:0 2px 15px rgba(0,0,0,0.05);
+            position:sticky;
+            top:0;
+        }
+
+        .logo{
+            font-size:22px;
+            font-weight:bold;
+            color:#0b5d3b;
+        }
+
+        .nav-links a{
+            margin-left:20px;
+            text-decoration:none;
+            color:#333;
+            transition:0.3s;
+        }
+
+        .nav-links a:hover{
+            color:#0b5d3b;
+        }
+
+        /* CHECKOUT BOX */
+        .container{
+            width:420px;
+            margin:70px auto;
+            background:white;
+            padding:40px;
+            border-radius:18px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+            position:relative;
+            overflow:hidden;
+        }
+
+        /* soft green glow background */
+        .container::before{
+            content:"";
+            position:absolute;
+            top:-50px;
+            right:-50px;
+            width:120px;
+            height:120px;
+            background:rgba(11,93,59,0.1);
+            border-radius:50%;
+        }
+
+        h1{
+            text-align:center;
+            color:#0b5d3b;
+            margin-bottom:10px;
+            font-size:28px;
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:25px;
+            color:#444;
+            font-size:18px;
+            font-weight:normal;
+        }
+
+        input, textarea{
+            width:100%;
+            padding:14px;
+            margin-bottom:15px;
+            border:1px solid #e6e6e6;
+            border-radius:10px;
+            font-size:14px;
+            transition:0.3s;
+            outline:none;
+        }
+
+        input:focus, textarea:focus{
+            border-color:#0b5d3b;
+            box-shadow:0 0 0 3px rgba(11,93,59,0.1);
+        }
+
+        textarea{
+            resize:none;
+            height:90px;
+        }
+
+        button{
+            width:100%;
+            padding:14px;
+            background:#0b5d3b;
+            color:white;
+            border:none;
+            border-radius:10px;
+            cursor:pointer;
+            font-size:16px;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#08442c;
+            transform:translateY(-2px);
+        }
+
+        /* small footer feel */
+        .hint{
+            text-align:center;
+            font-size:12px;
+            color:#888;
+            margin-top:10px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+
+    <div class="logo">Elegance</div>
+
+    <div class="nav-links">
+        <a href="/home/">Home</a>
+        <a href="/products/">Products</a>
+        <a href="/cart/">Cart</a>
+        <a href="/logout/">Logout</a>
+    </div>
+
+</div>
+
+<!-- CHECKOUT -->
+<div class="container">
+
+    <h1>Checkout</h1>
+    <h2>Total: ₹{{ total }}</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <input type="text" name="name" placeholder="Your Name" required>
+
+        <textarea name="address" placeholder="Delivery Address" required></textarea>
+
+        <input type="text" name="phone" placeholder="Phone Number" required>
+
+        <button type="submit">Place Order</button>
+    </form>
+
+    <div class="hint">Secure checkout powered by Elegance Store</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+={% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>E-Commerce Store</title>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            padding:20px;
+            background:#f4f4f4;
+        }
+
+        .navbar{
+            background:white;
+            padding:15px;
+            margin-bottom:20px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            border-radius:10px;
+        }
+
+        .products{
+            display:flex;
+            gap:20px;
+            flex-wrap:wrap;
+        }
+
+        .card{
+            background:white;
+            padding:15px;
+            border-radius:10px;
+            width:220px;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .card img{
+            width:100%;
+            height:200px;
+            object-fit:cover;
+            border-radius:10px;
+        }
+
+        button{
+            background:#0b5d3b;
+            color:white;
+            border:none;
+            padding:10px;
+            border-radius:5px;
+            cursor:pointer;
+            margin-top:5px;
+            width:100%;
+        }
+
+        .view{
+            background:black;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <h2 style="color:#0b5d3b;">Elegance Store</h2>
+
+    <a href="/cart/">
+        <button>Go To Cart</button>
+    </a>
+</div>
+
+<h1>Our Products</h1>
+
+<div class="products">
+
+{% for product in products %}
+
+<div class="card">
+
+    <!-- ✅ FIXED IMAGE SAFETY -->
+    {% if product.image %}
+        <img src="{{ product.image.url }}">
+    {% else %}
+        <img src="https://via.placeholder.com/300x200?text=No+Image">
+    {% endif %}
+
+    <h3>{{ product.name }}</h3>
+
+    <p>₹{{ product.price }}</p>
+
+    <a href="/product/{{ product.id }}/">
+        <button class="view">View Product</button>
+    </a>
+
+    <a href="/add-to-cart/{{ product.id }}/">
+        <button>Add To Cart</button>
+    </a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+</html>
